@@ -1,0 +1,39 @@
+@model IEnumerable<MyUquvMarkaz.Models.Teacher>
+
+@{
+    ViewData["Title"] = "Teachers List";
+}
+
+<h1>Teachers</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Teacher</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var teacher in Model)
+        {
+            <tr>
+                <td>@teacher.Id</td>
+                <td>@teacher.FullName</td>
+                <td>@teacher.Age</td>
+                <td>@teacher.Phone</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@teacher.Id" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@teacher.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@teacher.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
