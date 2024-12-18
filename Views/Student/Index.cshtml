@@ -1,6 +1,6 @@
 @model IEnumerable<MyUquvMarkaz.Models.Student>
 <h1>Students</h1>
-<p><a asp-action="Create" class="btn btn-primary">Create New Student</a></p>
+<p><a asp-action="Create" class="btn btn-primary mb-3">Create New Student</a></p>
 <table class="table">
     <thead>
         <tr>
@@ -18,9 +18,9 @@
                 <td>@student.Age</td>
                 <td>@student.Phone</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@student.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@student.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@student.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-info">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@student.Id" class="btn btn-warning">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }

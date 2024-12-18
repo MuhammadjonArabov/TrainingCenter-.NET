@@ -37,14 +37,22 @@ namespace MyUquvMarkaz.Controllers
         // Create (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FullName,Age,Phone")] Student student)
+        public async Task<IActionResult> Create(Student student)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                _context.Add(student);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (!ModelState.IsValid)
+                {
+                    _context.Add(student);
+                    var result = await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            } 
             return View(student);
         }
 
@@ -62,7 +70,7 @@ namespace MyUquvMarkaz.Controllers
         //  (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,Age,Phone")] Student student)
+        public async Task<IActionResult> Edit(int id, Student student)
         {
             if (id != student.Id) return NotFound();
 

@@ -39,13 +39,13 @@ namespace MyUquvMarkaz.Controllers
         // Create - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FullName,Age,Phone")] Teacher teacher)
+        public async Task<IActionResult> Create(Teacher teacher)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(teacher);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var result = await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
             return View(teacher);
         }
