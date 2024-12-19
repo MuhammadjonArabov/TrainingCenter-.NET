@@ -1,0 +1,28 @@
+@model IEnumerable<MyUquvMarkaz.Models.Subject>
+<h1>Subjects</h1>
+<p><a asp-action="Create" class="btn btn-primary mb-3">Create New Subject</a></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Teacher</th>
+            <th>Number of Students</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subject in Model)
+        {
+            <tr>
+                <td>@subject.Name</td>
+                <td>@subject.Teacher?.FullName</td>
+                <td>@(subject.Students?.Count ?? 0)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@subject.Id" class="btn btn-info">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@subject.Id" class="btn btn-warning">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@subject.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
