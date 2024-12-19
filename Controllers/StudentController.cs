@@ -28,13 +28,11 @@ namespace MyUquvMarkaz.Controllers
             return View(student);
         }
 
-        // Create (GET)
         public IActionResult Create()
         {
             return View();
         }
 
-        // Create (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Student student)
@@ -56,7 +54,6 @@ namespace MyUquvMarkaz.Controllers
             return View(student);
         }
 
-        // (GET)
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -67,14 +64,13 @@ namespace MyUquvMarkaz.Controllers
             return View(student);
         }
 
-        //  (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Student student)
         {
             if (id != student.Id) return NotFound();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -91,7 +87,6 @@ namespace MyUquvMarkaz.Controllers
             return View(student);
         }
 
-        // Delete (GET)
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -102,10 +97,9 @@ namespace MyUquvMarkaz.Controllers
             return View(student);
         }
 
-        // Delete (POST)
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var student = await _context.Students.FindAsync(id);
             if (student != null) _context.Students.Remove(student);

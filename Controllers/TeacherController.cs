@@ -13,13 +13,11 @@ namespace MyUquvMarkaz.Controllers
             _context = context;
         }
 
-        // Index - List all teachers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Teachers.ToListAsync());
         }
 
-        // Details - View one teacher's details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -30,27 +28,31 @@ namespace MyUquvMarkaz.Controllers
             return View(teacher);
         }
 
-        // Create - GET
         public IActionResult Create()
         {
             return View();
         }
 
-        // Create - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Teacher teacher)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                _context.Add(teacher);
-                var result = await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _context.Add(teacher);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
             }
             return View(teacher);
         }
 
-        // Edit - GET
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -61,14 +63,13 @@ namespace MyUquvMarkaz.Controllers
             return View(teacher);
         }
 
-        // Edit - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,Age,Phone")] Teacher teacher)
+        public async Task<IActionResult> Edit(int id, Teacher teacher)
         {
             if (id != teacher.Id) return NotFound();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -85,7 +86,6 @@ namespace MyUquvMarkaz.Controllers
             return View(teacher);
         }
 
-        // Delete - GET
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -96,10 +96,9 @@ namespace MyUquvMarkaz.Controllers
             return View(teacher);
         }
 
-        // Delete - POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var teacher = await _context.Teachers.FindAsync(id);
             if (teacher != null)
