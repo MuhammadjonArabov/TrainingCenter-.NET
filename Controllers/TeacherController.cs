@@ -39,7 +39,7 @@ namespace MyUquvMarkaz.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     _context.Add(teacher);
                     await _context.SaveChangesAsync();

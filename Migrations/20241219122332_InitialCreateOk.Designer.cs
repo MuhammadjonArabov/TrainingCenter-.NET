@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyUquvMarkaz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241217101321_AddStudentTable")]
-    partial class AddStudentTable
+    [Migration("20241219122332_InitialCreateOk")]
+    partial class InitialCreateOk
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

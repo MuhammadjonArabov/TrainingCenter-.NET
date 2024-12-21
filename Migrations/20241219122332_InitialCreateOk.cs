@@ -5,7 +5,7 @@
 namespace MyUquvMarkaz.Migrations
 {
     /// <inheritdoc />
-    public partial class AddStudentTable : Migration
+    public partial class InitialCreateOk : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
